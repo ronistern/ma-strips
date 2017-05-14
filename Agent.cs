@@ -1221,7 +1221,7 @@ namespace Planning
             foreach (var actionName in mapActionName.Keys.ToList())
             {
                 Action act = mapActionName[actionName];
-                Program.sizeOfRegressionTree = 0;
+                AdvancedLandmarkProjectionPlaner.sizeOfRegressionTree = 0;
 
                 CompoundFormula pre = new CompoundFormula("and");
                 int globaDepth = 0;
@@ -1240,7 +1240,7 @@ namespace Planning
 
                             int depth1;
                             int depth2;
-                            int tmp = Program.sizeOfRegressionTree;
+                            int tmp = AdvancedLandmarkProjectionPlaner.sizeOfRegressionTree;
                             HashSet<Action> Achievers = Distributed_Landmarks_Detection.GetPublicActionsLandmarks2(gpPre, this, out depth1, true);
                             if (Achievers.Count > 0)
                             {
@@ -1415,7 +1415,7 @@ namespace Planning
             foreach (var actionName in mapActionName.Keys.ToList())
             {
                 Action act = mapActionName[actionName];
-                Program.sizeOfRegressionTree = 0;
+                AdvancedLandmarkProjectionPlaner.sizeOfRegressionTree = 0;
 
                 CompoundFormula pre = new CompoundFormula("and");
                 int globaDepth = 0;
@@ -1433,7 +1433,7 @@ namespace Planning
 
                             int depth1;
                             int depth2;
-                            int tmp = Program.sizeOfRegressionTree;
+                            int tmp = AdvancedLandmarkProjectionPlaner.sizeOfRegressionTree;
                             HashSet<Action> Achievers = Distributed_Landmarks_Detection.GetPublicActionsLandmarks2(gpPre, this, out depth1, true);
                             
 
@@ -1579,7 +1579,7 @@ namespace Planning
             foreach (var actionName in mapActionName.Keys.ToList())
             {
                 Action act = mapActionName[actionName];
-                Program.sizeOfRegressionTree = 0;
+                AdvancedLandmarkProjectionPlaner.sizeOfRegressionTree = 0;
 
                 CompoundFormula pre = new CompoundFormula("and");
                 int globaDepth = 0;
@@ -1597,7 +1597,7 @@ namespace Planning
 
                             int depth1;
                             int depth2;
-                            int tmp = Program.sizeOfRegressionTree;
+                            int tmp = AdvancedLandmarkProjectionPlaner.sizeOfRegressionTree;
                             HashSet<Action> Achievers = Distributed_Landmarks_Detection.GetPublicActionsLandmarks2(gpPre, this, out depth1, true);
                             if (Achievers.Count > 0)
                             {

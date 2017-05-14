@@ -611,7 +611,7 @@ namespace Planning
         }
         public List<string> PdbFFPlan(Domain d, Problem p, State curentState, Formula goal, List<Action> privateActions, int cMaxMilliseconds, out bool bUnsolvable)
         {
-            Program.KillPlanners();
+            RunUtils.KillPlanners();
             List<string> ffLplan = new List<string>();
             List<string> lPlan = new List<string>();
 
@@ -908,7 +908,7 @@ namespace Planning
 
         public List<string> FDPlan(Domain d, Problem p, State curentState, Formula goal, List<Action> privateActions, int cMaxMilliseconds, out bool bUnsolvable)
         {
-            Program.KillPlanners();
+            RunUtils.KillPlanners();
             List<string> ffLplan = new List<string>();
             List<string> lPlan = new List<string>();
 
@@ -1053,7 +1053,7 @@ namespace Planning
 
         public List<string> ManualSolve(Domain d, Problem p, State curentState, Formula goal, List<Action> privateActions, int cMaxMilliseconds, out bool bUnsolvable)
         {
-            Program.KillPlanners();
+            RunUtils.KillPlanners();
             List<string> ffLplan = new List<string>();
             List<string> lPlan = new List<string>();
 

@@ -242,13 +242,13 @@ namespace Planning
         {
             //List<Thread> threads = new List<Thread>();
             //begin = DateTime.Now;
-            Program.countMacro = 0.0;
-            Program.ffMessageCounter = 0;
-            Program.countAvgPerMacro = 0.0;
-            Program.sendedStateCounter = 0;
-            Program.StateExpendCounter = 0;
+            countMacro = 0.0;
+            ffMessageCounter = 0;
+            countAvgPerMacro = 0.0;
+            sendedStateCounter = 0;
+            Program.StateExpandedCounter = 0;
             MapsPlanner.generateCounter = 0;
-            Program.notSandedStates = 0;
+            notSandedStates = 0;
             List<string> lplan = null;
             while (lplan == null)
             {
@@ -288,14 +288,14 @@ namespace Planning
             //List<Thread> threads = new List<Thread>();
             //begin = DateTime.Now;
             //return null;
-            Program.countMacro = 0.0;
-            Program.countAvgPerMacro = 0.0;
-            Program.sendedStateCounter = 0;
-            Program.ffMessageCounter = 0;
-            Program.StateExpendCounter = 0;
-            Program.notSandedStates = 0;
+            countMacro = 0.0;
+            countAvgPerMacro = 0.0;
+            sendedStateCounter = 0;
+            ffMessageCounter = 0;
+            Program.StateExpandedCounter = 0;
+            notSandedStates = 0;
             MapsPlanner.generateCounter = 0;
-            Program.makeSpanPlanTime = 0.0;
+            makeSpanPlanTime = 0.0;
             List<string> lplan = null;
             MapsAgent.InitMutex(MapsAgents);
             
@@ -348,7 +348,7 @@ namespace Planning
                     Console.WriteLine("ddd");
                 x++;*/
                 double maxTime = iterationTimes.Max();
-                Program.makeSpanPlanTime += maxTime;
+                makeSpanPlanTime += maxTime;
 
                 if (lplan != null)
                 {
@@ -371,14 +371,14 @@ namespace Planning
             //List<Thread> threads = new List<Thread>();
             //begin = DateTime.Now;
             //return null;
-            Program.countMacro = 0.0;
-            Program.countAvgPerMacro = 0.0;
-            Program.sendedStateCounter = 0;
-            Program.ffMessageCounter = 0;
-            Program.StateExpendCounter = 0;
-            Program.notSandedStates = 0;
+            countMacro = 0.0;
+            countAvgPerMacro = 0.0;
+            sendedStateCounter = 0;
+            ffMessageCounter = 0;
+            Program.StateExpandedCounter = 0;
+            notSandedStates = 0;
             MapsPlanner.generateCounter = 0;
-            Program.makeSpanPlanTime = 0.0;
+            makeSpanPlanTime = 0.0;
             List<string> lplan = null;
             MapsAgent.InitMutex(MapsAgents);
 
@@ -409,7 +409,7 @@ namespace Planning
                 }
                
                 double maxTime = iterationTimes.Max();
-                Program.makeSpanPlanTime += maxTime;
+                makeSpanPlanTime += maxTime;
 
                 if (lplan != null)
                 {
@@ -424,13 +424,13 @@ namespace Planning
         {
             //List<Thread> threads = new List<Thread>();
             //begin = DateTime.Now;
-            Program.countMacro = 0.0;
-            Program.countAvgPerMacro = 0.0;
-            Program.sendedStateCounter = 0;
-            Program.ffMessageCounter = 0;
-            Program.StateExpendCounter = 0;
-            Program.notSandedStates = 0;
-            Program.makeSpanPlanTime = 0.0;
+            countMacro = 0.0;
+            countAvgPerMacro = 0.0;
+            sendedStateCounter = 0;
+            ffMessageCounter = 0;
+            Program.StateExpandedCounter = 0;
+            notSandedStates = 0;
+            makeSpanPlanTime = 0.0;
             MapsPlanner.generateCounter = 0;
             List<string> lplan = null;
             MapsAgent.InitMutex(MapsAgents);
@@ -455,7 +455,7 @@ namespace Planning
                 }
 
                 double maxTime = iterationTimes.Max();
-                Program.makeSpanPlanTime += maxTime;
+                makeSpanPlanTime += maxTime;
 
                 if (lplan != null)
                 {
@@ -488,12 +488,12 @@ namespace Planning
             //tmpMutex = new Mutex();
 
             MapsAgent.InitMutex(MapsAgents);
-            Program.countMacro = 0.0;
-            Program.ffMessageCounter = 0;
-            Program.countAvgPerMacro = 0.0;
-            Program.sendedStateCounter = 0;
-            Program.StateExpendCounter = 0;
-            Program.notSandedStates = 0;
+            countMacro = 0.0;
+            ffMessageCounter = 0;
+            countAvgPerMacro = 0.0;
+            sendedStateCounter = 0;
+            Program.StateExpandedCounter = 0;
+            notSandedStates = 0;
             MapsPlanner.generateCounter = 0;
             List<string> lplan = null;
             List<Thread> threads = new List<Thread>();
@@ -523,5 +523,12 @@ namespace Planning
             return finalPlan;
 
         }
+
+        public static double countAvgPerMacro = 0.0;
+        public static double countMacro = 0.0;
+        public static int ffMessageCounter = 0;
+        static public int notSandedStates = 0;
+        static public double makeSpanPlanTime = 0;
+        public static int sendedStateCounter = 0;
     }
 }

@@ -1690,7 +1690,7 @@ namespace Planning
                     }
                     else
                     {
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                     }
                 }
                 else
@@ -1758,7 +1758,7 @@ namespace Planning
                     }
                     else
                     {
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                     }
                 }
                 else
@@ -1829,7 +1829,7 @@ namespace Planning
                         publicSet.Add(gp);
                     }
                 }
-                Program.ffMessageCounter++;
+                MapsPlanner.ffMessageCounter++;
             }
 
             bool flag2 = true;
@@ -1856,7 +1856,7 @@ namespace Planning
                             tmpPublicSet.Add(gp);
                         }
                     }
-                    Program.ffMessageCounter++;
+                    MapsPlanner.ffMessageCounter++;
                 }
                 if (isGlobalGoal)
                 {
@@ -1882,12 +1882,12 @@ namespace Planning
                 {
                     publicGoals.Add(publicGoal);
                 }
-                Program.ffMessageCounter++;
+                MapsPlanner.ffMessageCounter++;
             }
             foreach (MapsAgent agent in agents)
             {
                 agent.InitRelaxtionPlan();
-                Program.ffMessageCounter++;
+                MapsPlanner.ffMessageCounter++;
             }
             flag2 = true;
             while (flag2)
@@ -1905,7 +1905,7 @@ namespace Planning
                             newPublicGoals.Add(gp);
                     if (localAns.Equals("continue"))
                         flag2 = true;
-                    Program.ffMessageCounter++;
+                    MapsPlanner.ffMessageCounter++;
                 }
                 if (publicGoals.Count > 0 && !deadEnd)
                     throw new Exception("bug"); ;
@@ -1919,7 +1919,7 @@ namespace Planning
             {
                 count += agent.GetRelaxPlanSize();
                 preferFacts.UnionWith(agent.GetRelaxPlanPreconditions());
-                Program.ffMessageCounter++;
+                MapsPlanner.ffMessageCounter++;
             }
 
             return count;

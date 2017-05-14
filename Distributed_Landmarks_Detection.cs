@@ -701,7 +701,7 @@ namespace Planning
                 {
                     size += la.facts.Count();
                 }
-                    Program.sizeOfRegressionTree+= size;
+                    AdvancedLandmarkProjectionPlaner.sizeOfRegressionTree+= size;
             }
                 HashSet<Landmark> dellPar = new HashSet<Landmark>();
                 foreach (Landmark land in tmpForDepthTest)

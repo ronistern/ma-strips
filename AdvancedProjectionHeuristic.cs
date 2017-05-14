@@ -50,11 +50,11 @@ namespace Planning
             predicates = new List<Predicate>();
             predicates.Add(newPrePredicate);
 
-            Program.countOfProjAction = 0;
-            Program.countOfProjFact = 0;
-            Program.sizeOfRegressionTree = 0;
-            Program.maxSizeOfRegressionTree = 0;
-            Program.maxDepthOfRegressionTree = 0;
+            AdvancedLandmarkProjectionPlaner.countOfProjAction = 0;
+            AdvancedLandmarkProjectionPlaner.countOfProjFact = 0;
+            AdvancedLandmarkProjectionPlaner.sizeOfRegressionTree = 0;
+            AdvancedLandmarkProjectionPlaner.maxSizeOfRegressionTree = 0;
+            AdvancedLandmarkProjectionPlaner.maxDepthOfRegressionTree = 0;
             DateTime startTime = DateTime.Now;
             m_lDomains = lDomains;
             globalInitialState = new State((Problem)(null));
@@ -504,7 +504,7 @@ namespace Planning
                 }
                 else
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return RegGrounding(out finalPlan, out fault);
                 }
 
@@ -580,7 +580,7 @@ namespace Planning
                     }
                     else
                     {
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                         return RegGrounding(out finalPlan, out fault);
 
                     }
@@ -590,7 +590,7 @@ namespace Planning
             {
                 if (agSt.Value == null)
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return RegGrounding(out finalPlan, out fault);
                 }
             }
@@ -689,7 +689,7 @@ namespace Planning
                 }
                 else
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return GroundingActions(out finalPlan, out fault);
                 }
 
@@ -767,7 +767,7 @@ namespace Planning
                     }
                     else
                     {
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                         return GroundingActions(out finalPlan, out fault);
 
                     }
@@ -777,7 +777,7 @@ namespace Planning
             {
                 if (agSt.Value == null)
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return GroundingActions(out finalPlan, out fault);
                 }
             }
@@ -908,7 +908,7 @@ namespace Planning
                 }
                 else
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return RegTasksDistributionGrounding(out finalPlan, out fault);
                 }
 
@@ -985,7 +985,7 @@ namespace Planning
                     else
                     {
 
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                         return RegTasksDistributionGrounding(out finalPlan, out fault);
                         //return planToGoalIIII(out finalPlan, out fault);
 
@@ -996,7 +996,7 @@ namespace Planning
             {
                 if (agSt.Value == null)
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return RegTasksDistributionGrounding(out finalPlan, out fault);
                 }
             }
@@ -1123,7 +1123,7 @@ namespace Planning
                 }
                 else
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return Grounding(out finalPlan, out fault);
                 }
 
@@ -1200,7 +1200,7 @@ namespace Planning
                     else
                     {
 
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                         return Grounding(out finalPlan, out fault);
                         //return planToGoalIIII(out finalPlan, out fault);
 
@@ -1211,7 +1211,7 @@ namespace Planning
             {
                 if (agSt.Value == null)
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return Grounding(out finalPlan, out fault);
                 }
             }
@@ -1298,7 +1298,7 @@ namespace Planning
                 }
                 else
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return false;
                 }
 
@@ -1363,7 +1363,7 @@ namespace Planning
                     }
                     else
                     {
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                         return false;
                         //return planToGoalIIII(out finalPlan, out fault);
 
@@ -1374,7 +1374,7 @@ namespace Planning
             {
                 if (agSt.Value == null)
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return false;
 
                 }

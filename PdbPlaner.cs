@@ -290,5 +290,7 @@ namespace Planning
             lvertxs.RemoveAt(index);
             return ans;
         }
+
+        static public PatternDatabase pdb = null;
     }
 }

@@ -608,7 +608,7 @@ namespace Planning
                 }
                 else
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return GroundingActions(out finalPlan, out fault);
                 }
 
@@ -691,7 +691,7 @@ namespace Planning
                         }
                         else
                         {
-                            Program.KillPlanners();
+                            RunUtils.KillPlanners();
                             return GroundingActions(out finalPlan, out fault);
 
                         }
@@ -702,7 +702,7 @@ namespace Planning
             {
                 if (agSt.Value == null)
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return GroundingActions(out finalPlan, out fault);
                 }
             }
@@ -912,7 +912,7 @@ namespace Planning
                             }
                             else
                             {
-                                Program.KillPlanners();
+                                RunUtils.KillPlanners();
                                 return GroundingActions(out finalPlan, out fault);
 
                             }
@@ -1009,7 +1009,7 @@ namespace Planning
                 }
                 else
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return false;
                 }
 
@@ -1092,7 +1092,7 @@ namespace Planning
                         }
                         else
                         {
-                            Program.KillPlanners();
+                            RunUtils.KillPlanners();
                             return GroundingActions(out finalPlan, out fault);
 
                         }
@@ -1103,7 +1103,7 @@ namespace Planning
             {
                 if (agSt.Value == null)
                 {
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
                     return false;
 
                 }

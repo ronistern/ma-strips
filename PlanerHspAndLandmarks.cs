@@ -182,7 +182,7 @@ namespace Planning
                     HashSet<CompoundFormula> levelPotential = new HashSet<CompoundFormula>();
                     int index = 1;
                     bool con = false;
-                    Program.StateExpendCounter++;
+                    Program.StateExpandedCounter++;
                     List<VertexHsp> lExpanded = Expand(curentVertex, levelPotential, needUpDate);
                     /*if (lExpanded.Count == 0)
                     {

@@ -933,14 +933,14 @@ namespace Planning
                             if (myOpenList.Contains(courentVertex, vc))
                             {
                                 flag = false;
-                                Program.notSandedStates++;
+                                MapsPlanner.notSandedStates++;
                                 notSended.Add(courentVertex);
                             }
                             else
                             if (closeList.Contains(courentVertex, vc))
                             {
                                 flag = false;
-                                Program.notSandedStates++;
+                                MapsPlanner.notSandedStates++;
                                 notSended.Add(courentVertex);
                             }
                             if (flag)
@@ -949,7 +949,7 @@ namespace Planning
                     }
 
 
-                    Program.StateExpendCounter++;
+                    Program.StateExpandedCounter++;
                     //    if (name.Contains("2")&& courentVertex.h==5)
                     //      Console.Write(" ");
                     closeList.Add(courentVertex);
@@ -969,11 +969,11 @@ namespace Planning
                             {
                                 if (act is MacroAction)
                                 {
-                                    Program.countMacro++;
-                                    Program.countAvgPerMacro += ((MacroAction)act).microActions.Count;
+                                    MapsPlanner.countMacro++;
+                                    MapsPlanner.countAvgPerMacro += ((MacroAction)act).microActions.Count;
                                 }
                             }
-                            Program.countAvgPerMacro = Program.countAvgPerMacro / Program.countMacro;
+                            MapsPlanner.countAvgPerMacro = MapsPlanner.countAvgPerMacro / MapsPlanner.countMacro;
                             relaxActions(allActions, courentVertex.lplan);
                             Program.countActions.Add(courentVertex.lplan.Count);
                             Program.actionSum += courentVertex.lplan.Count;
@@ -1278,7 +1278,7 @@ namespace Planning
                             if (closeList.Contains(courentVertex, vc))
                             {
                                 flag = false;
-                                Program.notSandedStates++;
+                                MapsPlanner.notSandedStates++;
                                 notSended.Add(courentVertex);
                             }
 
@@ -1293,7 +1293,7 @@ namespace Planning
                     }
 
 
-                    Program.StateExpendCounter++;
+                    Program.StateExpandedCounter++;
                     //    if (name.Contains("2")&& courentVertex.h==5)
                     //      Console.Write(" ");
                     closeList.Add(courentVertex);
@@ -1319,11 +1319,11 @@ namespace Planning
                             {
                                 if (act is MacroAction)
                                 {
-                                    Program.countMacro++;
-                                    Program.countAvgPerMacro += ((MacroAction)act).microActions.Count;
+                                    MapsPlanner.countMacro++;
+                                    MapsPlanner.countAvgPerMacro += ((MacroAction)act).microActions.Count;
                                 }
                             }
-                            Program.countAvgPerMacro = Program.countAvgPerMacro / Program.countMacro;
+                            MapsPlanner.countAvgPerMacro = MapsPlanner.countAvgPerMacro / MapsPlanner.countMacro;
                             relaxActions(allActions, courentVertex.lplan);
                             Program.countActions.Add(courentVertex.lplan.Count);
                             Program.actionSum += courentVertex.lplan.Count;
@@ -1582,7 +1582,7 @@ namespace Planning
                             if (closeList.Contains(courentVertex, vc))
                             {
                                 flag = false;
-                                Program.notSandedStates++;
+                                MapsPlanner.notSandedStates++;
                                 notSended.Add(courentVertex);
                             }
 
@@ -1592,7 +1592,7 @@ namespace Planning
                     }
 
 
-                    Program.StateExpendCounter++;
+                    Program.StateExpandedCounter++;
                     //    if (name.Contains("2")&& courentVertex.h==5)
                     //      Console.Write(" ");
                     closeList.Add(courentVertex);
@@ -1618,11 +1618,11 @@ namespace Planning
                             {
                                 if (act is MacroAction)
                                 {
-                                    Program.countMacro++;
-                                    Program.countAvgPerMacro += ((MacroAction)act).microActions.Count;
+                                    MapsPlanner.countMacro++;
+                                    MapsPlanner.countAvgPerMacro += ((MacroAction)act).microActions.Count;
                                 }
                             }
-                            Program.countAvgPerMacro = Program.countAvgPerMacro / Program.countMacro;
+                            MapsPlanner.countAvgPerMacro = MapsPlanner.countAvgPerMacro / MapsPlanner.countMacro;
                             relaxActions(allActions, courentVertex.lplan);
                             Program.countActions.Add(courentVertex.lplan.Count);
                             Program.actionSum += courentVertex.lplan.Count;
@@ -1928,7 +1928,7 @@ namespace Planning
                         }*/
 
 
-                        Program.StateExpendCounter++;
+                        Program.StateExpandedCounter++;
                         //    if (name.Contains("2")&& courentVertex.h==5)
                         //      Console.Write(" ");
                         closeList.Add(courentVertex);
@@ -1966,11 +1966,11 @@ namespace Planning
                                 {
                                     if (act is MacroAction)
                                     {
-                                        Program.countMacro++;
-                                        Program.countAvgPerMacro += ((MacroAction)act).microActions.Count;
+                                        MapsPlanner.countMacro++;
+                                        MapsPlanner.countAvgPerMacro += ((MacroAction)act).microActions.Count;
                                     }
                                 }
-                                Program.countAvgPerMacro = Program.countAvgPerMacro / Program.countMacro;
+                                MapsPlanner.countAvgPerMacro = MapsPlanner.countAvgPerMacro / MapsPlanner.countMacro;
                                 relaxActions(allActions, courentVertex.lplan);
                                 Program.countActions.Add(courentVertex.lplan.Count);
                                 Program.actionSum += courentVertex.lplan.Count;
@@ -2044,7 +2044,7 @@ namespace Planning
                         if (mv.returnTo != null && mv.returnTo.Contains(agentName))
                             continue;
                         MapsPlanner.massagePreCounter++;
-                        Program.sendedStateCounter++;
+                        MapsPlanner.sendedStateCounter++;
                         MapsVertex sendingVertex = new MapsVertex(mv);
                         sendingVertex.fullCopy(mv);
                         if (mv.returnTo != null)
@@ -2098,7 +2098,7 @@ namespace Planning
                         if (mv.returnTo != null && mv.returnTo.Contains(agentName))
                             continue;
                         MapsPlanner.massagePreCounter++;
-                        Program.sendedStateCounter++;
+                        MapsPlanner.sendedStateCounter++;
                         MapsVertex sendingVertex = new MapsVertex(mv);
                         sendingVertex.fullCopy(mv);
                         if (mv.returnTo != null)
@@ -2147,7 +2147,7 @@ namespace Planning
                         continue;
                     MapsPlanner.massageEffCounter++;
                     mv.shareWith = MapsPlanner.actionMap[lastAction.Name];
-                    Program.sendedStateCounter++;
+                    MapsPlanner.sendedStateCounter++;
                     MapsVertex sendingVertex = new MapsVertex(mv);
                     sendingVertex.fullCopy(mv);
                     sendingVertex.shareWith = MapsPlanner.actionMap[lastAction.Name];
@@ -2171,7 +2171,7 @@ namespace Planning
                 mv.shareWith = new HashSet<string>();
                 mv.shareWith.Add(name);
                 mv.shareWith.Add(agentName);
-                Program.sendedStateCounter++;
+                MapsPlanner.sendedStateCounter++;
                 MapsVertex sendingVertex = new MapsVertex(mv);
                 sendingVertex.fullCopy(mv);
                 sendingVertex.shareWith = new HashSet<string>();
@@ -2207,7 +2207,7 @@ namespace Planning
                     {
                         ++MapsPlanner.massageEffCounter;
                         mv.shareWith = MapsPlanner.sendedToAllSign;
-                        ++Program.sendedStateCounter;
+                        ++MapsPlanner.sendedStateCounter;
                         MapsVertex mapsVertex = new MapsVertex(mv);
                         mapsVertex.fullCopy(mv);
                        
@@ -2249,7 +2249,7 @@ namespace Planning
                     {
                         ++MapsPlanner.massageEffCounter;
                         mv.shareWith = MapsPlanner.sendedToAllSign;
-                        ++Program.sendedStateCounter;
+                        ++MapsPlanner.sendedStateCounter;
                         MapsVertex mapsVertex = new MapsVertex(mv);
                         mapsVertex.fullCopy(mv);
 
@@ -2301,7 +2301,7 @@ namespace Planning
                     {
                         MapsPlanner.massageEffCounter++;
                         mv.shareWith = MapsPlanner.sendedToAllSign;
-                        Program.sendedStateCounter++;
+                        MapsPlanner.sendedStateCounter++;
                         MapsVertex sendingVertex = new MapsVertex(mv);
                         sendingVertex.fullCopy(mv);
                         sendingVertex.shareWith = MapsPlanner.sendedToAllSign;
@@ -2799,7 +2799,7 @@ namespace Planning
                     }
                     else
                     {
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                     }
                 }
                 else
@@ -2866,7 +2866,7 @@ namespace Planning
                     }
                     else
                     {
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                     }
                 }
                 else
@@ -2948,7 +2948,7 @@ namespace Planning
                         }
                     }
                     else
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                 }
                 else
                 {
@@ -2982,7 +2982,7 @@ namespace Planning
                     }
                 }
                 else
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
             }
             else
                 groupPlan[highLevelplan.Count + agentIndex] = new List<string>();
@@ -3035,7 +3035,7 @@ namespace Planning
                         }
                     }
                     else
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                 }
                 else
                 {
@@ -3065,7 +3065,7 @@ namespace Planning
                     }
                 }
                 else
-                    Program.KillPlanners();
+                    RunUtils.KillPlanners();
             }
             else
                 groupPlan[highLevelplan.Count + agentIndex] = new List<string>();

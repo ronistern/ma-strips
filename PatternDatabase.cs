@@ -45,7 +45,7 @@ namespace Planning
                         for (int i = 1; i < items.Length; i++)
                         {
                             string[] targetCost = items[i].Split('&');
-                            cooperationCanGet[mapStringtoPublicPredicate[items[0]]].Add(mapStringtoPublicPredicate[targetCost[0]], int.Parse(targetCost[1]));
+                            cooperationCanGet[mapStringtoPublicPredicate[items[0]]].Add(mapStringtoPublicPredicate[targetCost[0]], Int32.Parse(targetCost[1]));
 
                         }
                     }
@@ -299,7 +299,7 @@ namespace Planning
 
                     }
 
-                    Program.messages2 += (agents.Count - 1) * agents.Count;
+                    messages2 += (agents.Count - 1) * agents.Count;
                     WritePdb(path);
 
                 }
@@ -319,7 +319,7 @@ namespace Planning
                     {
                         pdbWriter.Write(item.Key.ToString()+"~");
                         int j = 0;
-                        foreach(KeyValuePair<GroundedPredicate,int> targetCost in item.Value)
+                        foreach(KeyValuePair<GroundedPredicate, int> targetCost in item.Value)
                         {
                             if (j == item.Value.Count - 1)
                             {
@@ -336,5 +336,7 @@ namespace Planning
                 }
                 pdbWriter.Close();
         }
-   }
+
+        static public double messages2 = 0;
+    }
 }

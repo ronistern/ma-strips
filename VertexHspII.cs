@@ -1273,7 +1273,7 @@ namespace Planning
                         else
                         {
                             planTheard.Abort();
-                            Program.KillPlanners();
+                            RunUtils.KillPlanners();
                             return planToGoal_ffToFormoula(out finalPlan, out fault);
 
                         }
@@ -1342,7 +1342,7 @@ namespace Planning
                         else
                         {
                             planTheard.Abort();
-                            Program.KillPlanners();
+                            RunUtils.KillPlanners();
                             return planToGoal_ffToFormoula(out finalPlan, out fault);
                         }
                     }
@@ -1356,7 +1356,7 @@ namespace Planning
             }
             catch (Exception ex)
             {
-                Program.KillPlanners();
+                RunUtils.KillPlanners();
                 return planToGoal_ffToFormoula(out finalPlan, out fault);
             }
 
@@ -1964,7 +1964,7 @@ namespace Planning
                     else
                     {
                         return planToGoal_ffToActions(out finalPlan, out fault);
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                         return planToGoalIIII(out finalPlan, out fault);
 
                     }
@@ -2141,7 +2141,7 @@ namespace Planning
                     else
                     {
                         throw new Exception();
-                        Program.KillPlanners();
+                        RunUtils.KillPlanners();
                         return planToGoalIIII(out finalPlan, out fault);
 
                     }

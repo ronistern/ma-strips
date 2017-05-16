@@ -148,10 +148,8 @@ namespace Planning
                         Program.WriteResults(dir.Name, " success");
                     }
                     else
-                    {
-                        //Program.timeResults.WriteLine("*");
-                        //Program.timeResults.Flush();
-                        Program.WriteResults(dir.Name, " plan verification failed");
+                    {   
+                        Program.WriteResults(dir.Name, " plan verification failed - could not solve the problem :(");
                     }
                     Console.WriteLine();
 
@@ -176,115 +174,19 @@ namespace Planning
             }
             Program.Start = DateTime.Now;
             pdbCreationTime = 0;
-            Console.WriteLine("Grounding");
-            BuildAgents_II.mapActionNameToAgents = new Dictionary<string, HashSet<string>>();
-            bool bNewPublicFacts = true;
-            HashSet<GroundedPredicate> lPublicFacts = new HashSet<GroundedPredicate>();
-            for (int i = 0; i < lDomains.Count; i++)
-            {
-                lDomains[i].StartGrounding(lProblems[i], lPublicFacts);
-
-            }
-
-            while (bNewPublicFacts)
-            {
-                int cPublicFacts = lPublicFacts.Count;
-                for (int i = 0; i < lDomains.Count; i++)
-                {
-                    lDomains[i].ContinueGrounding(lProblems[i], lPublicFacts);
-
-                }
-                bNewPublicFacts = lPublicFacts.Count > cPublicFacts;
-            }
-            List<Domain> lGrounded = new List<Domain>();
-            for (int i = 0; i < lDomains.Count; i++)
-            {
-                lGrounded.Add(lDomains[i].FinishGrounding(i));
-            }
-
-
-            /* if (UseHacks)
-             {
-                 Console.WriteLine("Attempting hacks");
-                 lPlan = SolveSingleAgent(lGrounded, lProblems);
-                 if (lPlan != null)
-                 {
-                     WritePlanToFile(lPlan, sOutputDirectory + "/" + sOutputFile);
-                     return;
-                 }
-                 lPlan = SolveUsingProjectedPublicActions(lGrounded, lProblems);
-             }*/
-
-
+            var lGroundedProblems = GroundProblems(lDomains, lProblems);
+            
             Program.internalPlaner = Program.PlanerType.ff_toActions;
-            BuildAgents_II buildAgents = new BuildAgents_II(lDomains, lGrounded, lProblems);
+            BuildAgents_II buildAgents = new BuildAgents_II(lDomains, lGroundedProblems, lProblems);
             List<Agent> agents = buildAgents.ReturnAgents();
 
-            Dictionary<string, HashSet<GroundedPredicate>> allPublicPredicate = new Dictionary<string, HashSet<GroundedPredicate>>();
-            foreach (Agent agent in agents)
-            {
-
-                allPublicPredicate.Add(agent.name, new HashSet<GroundedPredicate>());
-                foreach (Action publicAct in agent.publicActions)
-                {
-                    foreach (GroundedPredicate pre in publicAct.HashPrecondition)
-                    {
-                        if (agent.PublicPredicates.Contains(pre))
-                        {
-                            allPublicPredicate[agent.name].Add(pre);
-                        }
-                    }
-
-                    foreach (GroundedPredicate eff in publicAct.HashEffects)
-                    {
-                        if (agent.PublicPredicates.Contains(eff))
-                        {
-                            allPublicPredicate[agent.name].Add(eff);
-                        }
-                    }
-                }
-                /* foreach (GroundedPredicate gp in agent.PublicPredicates)
-                 {
-                     allPublicPredicate[agent.name].Add(gp);
-                 }*/
-            }
-            foreach (Agent agent in agents)
-            {
-                // agent.ReducePublicActions(allPublicPredicate);
-            }
+            GetPublicPredicates(agents);
             List<string> lPlan = null;
 
             if (Program.highLevelPlanerType == Program.HighLevelPlanerType.Projection)
             {
                 Console.WriteLine("Planning");
-                bool stop = false;
-                while (!stop)
-                {
-                    stop = true;
-                    string name = "";
-                    GroundedPredicate currentGoal = null;
-                    foreach (Agent agent in agents)
-                    {
-                        currentGoal = agent.GetGoal();
-                        if (currentGoal != null)
-                        {
-                            stop = false;
-                            name = agent.name;
-                            break;
-                        }
-                    }
-                    if (!stop)
-                    {
-                        foreach (Agent agent in agents)
-                        {
-                            if (!agent.name.Equals(name))
-                            {
-                                agent.ReceiveGoal(currentGoal);
-                            }
-                        }
-                    }
-
-                }
+                ShareGoals(agents);
                 AdvancedLandmarkProjectionPlaner planner = new AdvancedLandmarkProjectionPlaner();
                 lPlan = planner.Plan(agents, lDomains, lProblems, joinDomain);
             }
@@ -820,6 +722,124 @@ namespace Planning
             RunUtils.KillPlanners();
             m_agents = agents;
             return lPlan;
+        }
+
+        /**
+         * TODO: Not clear what this does. It looks like there's a bug here.
+         **/
+        private static void ShareGoals(List<Agent> agents)
+        {
+            bool stop = false;
+            while (!stop)
+            {
+                stop = true;
+                string name = "";
+                GroundedPredicate currentGoal = null;
+                foreach (Agent agent in agents)
+                {
+                    currentGoal = agent.GetGoal();
+                    if (currentGoal != null)
+                    {
+                        stop = false;
+                        name = agent.name;
+                        break;
+                    }
+                }
+                if (!stop)
+                {
+                    foreach (Agent agent in agents)
+                    {
+                        if (!agent.name.Equals(name))
+                        {
+                            agent.ReceiveGoal(currentGoal);
+                        }
+                    }
+                }
+            }
+        }
+
+        /**
+         * Extract the list of public predicates known to all agents
+         **/
+        private static Dictionary<string, HashSet<GroundedPredicate>> GetPublicPredicates(List<Agent> agents)
+        {
+            Dictionary<string, HashSet<GroundedPredicate>> allPublicPredicate =
+                new Dictionary<string, HashSet<GroundedPredicate>>();
+            foreach (Agent agent in agents)
+            {
+                allPublicPredicate.Add(agent.name, new HashSet<GroundedPredicate>());
+                foreach (Action publicAct in agent.publicActions)
+                {
+                    foreach (GroundedPredicate pre in publicAct.HashPrecondition)
+                    {
+                        if (agent.PublicPredicates.Contains(pre))
+                        {
+                            allPublicPredicate[agent.name].Add(pre);
+                        }
+                    }
+
+                    foreach (GroundedPredicate eff in publicAct.HashEffects)
+                    {
+                        if (agent.PublicPredicates.Contains(eff))
+                        {
+                            allPublicPredicate[agent.name].Add(eff);
+                        }
+                    }
+                }
+                /* foreach (GroundedPredicate gp in agent.PublicPredicates)
+                 {
+                     allPublicPredicate[agent.name].Add(gp);
+                 }*/
+            }
+            foreach (Agent agent in agents)
+            {
+                // agent.ReducePublicActions(allPublicPredicate);
+            }
+
+            return allPublicPredicate;
+        }
+
+        /**
+         * Ground the problems (i.e., convert from factored planning to unfactored)
+         **/
+        private static List<Domain> GroundProblems(List<Domain> lDomains, List<Problem> lProblems)
+        {
+            Console.WriteLine("Grounding");
+            BuildAgents_II.mapActionNameToAgents = new Dictionary<string, HashSet<string>>();
+            bool bNewPublicFacts = true;
+            HashSet<GroundedPredicate> lPublicFacts = new HashSet<GroundedPredicate>();
+            for (int i = 0; i < lDomains.Count; i++)
+            {
+                lDomains[i].StartGrounding(lProblems[i], lPublicFacts);
+            }
+
+            while (bNewPublicFacts)
+            {
+                int cPublicFacts = lPublicFacts.Count;
+                for (int i = 0; i < lDomains.Count; i++)
+                {
+                    lDomains[i].ContinueGrounding(lProblems[i], lPublicFacts);
+                }
+                bNewPublicFacts = lPublicFacts.Count > cPublicFacts;
+            }
+            List<Domain> lGrounded = new List<Domain>();
+            for (int i = 0; i < lDomains.Count; i++)
+            {
+                lGrounded.Add(lDomains[i].FinishGrounding(i));
+            }
+            return lGrounded;
+            
+            /* if (UseHacks)
+             {
+                 Console.WriteLine("Attempting hacks");
+                 lPlan = SolveSingleAgent(lGrounded, lProblems);
+                 if (lPlan != null)
+                 {
+                     WritePlanToFile(lPlan, sOutputDirectory + "/" + sOutputFile);
+                     return;
+                 }
+                 lPlan = SolveUsingProjectedPublicActions(lGrounded, lProblems);
+             }*/
         }
 
         public static double pdbCreationTime;

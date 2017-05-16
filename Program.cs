@@ -70,6 +70,8 @@ namespace Planning
             return false;
         }
 
+        
+
         public static int MaxMakespanCalculation(List<Agent> agents, List<string> lActionsName, Domain dJoint)
         {
             List<KeyValuePair<string, Action>> sPlan = Runner.GetActions(lActionsName, dJoint, agents);
@@ -168,20 +170,11 @@ namespace Planning
             Console.WriteLine(sDomain + " " + sMsg);
             swResults = new StreamWriter(outputPath+@"/Results.txt", true);
             swResults.WriteLine(sDomain + ", " + sMsg.Replace(",", ":") + ", " + PlanCost + ", " + PlanMakeSpan
-              // + "," + makeSpanPlanTime
-               + "," + (End.Subtract(Start).TotalSeconds - Runner.pdbCreationTime)
-               //+ "," + (StartGrounding.Subtract(StartHighLevelPlanning)).TotalSeconds
-               //  + "," + (StartGrounding - StartHighLevelPlanning).TotalSeconds
-               //     + "," + (End.Subtract(StartGrounding).TotalSeconds)
-              //   + "," + sendedStateCounter
-              // + "," + StateExpandedCounter
-              //  + "," + MapsPlanner.generateCounter
-              //  + "," + ffMessageCounter
-               //  + "," + countMacro
-               // + "," + countAvgPerMacro
-               );
+                + "," + (End.Subtract(Start).TotalSeconds - Runner.pdbCreationTime)
+            );
             swResults.Close();
             Console.WriteLine("Time: " + (End.Subtract(Start).TotalSeconds - Runner.pdbCreationTime));
+            Console.WriteLine("Plan makespan: " + PlanMakeSpan);
         }
 
 

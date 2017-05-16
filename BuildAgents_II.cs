@@ -134,6 +134,7 @@ namespace Planning
 
                 List<GroundedPredicate> goal = DivideGoal(p.Goal, d.PublicActions.ToList(), d.PrivateActions.ToList(), publicPredicates);
                 lAllGoals.UnionWith(p.Goal.GetAllPredicates());
+
                 foreach (Predicate pGoal in goal)
                     lAllDividedGoals.Add(pGoal);
 
@@ -195,7 +196,14 @@ namespace Planning
                         mapActionNameToAgents.Add(act.Name, new HashSet<string>());
                     mapActionNameToAgents[act.Name].Add("Agent: " + i.ToString());
                 }
-                Agent agent = new Agent(p, notGroundedDomain, d.groundedAction, d.PublicActions.ToList(), d.PrivateActions.ToList(), Predicates, publicPredicates, initialState, goal, "Agent: " + i.ToString(), projPublicActions, lInvariants);
+                /* Agent agent = new Agent(p, notGroundedDomain, d.groundedAction, d.PublicActions.ToList(), d.PrivateActions.ToList(), 
+                    Predicates, publicPredicates, initialState, goal, 
+                    "Agent: " + i.ToString(), projPublicActions, lInvariants); */
+                
+                Agent agent = new Agent(p, notGroundedDomain, d.groundedAction, d.PublicActions.ToList(), d.PrivateActions.ToList(),
+                    Predicates, publicPredicates, initialState, goal,
+                    "Agent: " + i.ToString(), projPublicActions, lInvariants);
+
                 agents.Add(agent);
             }
             //There is a problem with goals that are satisfied in the initial state and are constant - not handling for now

@@ -12,7 +12,7 @@ namespace Planning
     class Program
     {
         static StreamWriter swResults; // The stream for outputting results
-        public static string outputPath = Directory.GetCurrentDirectory() + @"\Results\";
+        public static string outputPath = Directory.GetCurrentDirectory() + @"\";
         public static string resultFilePath = "plan.txt";
 
         public static string defaultProblem = @"logistics00-factored\probLOGISTICS-4-0";
